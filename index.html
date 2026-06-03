@@ -392,7 +392,7 @@
       <div class="step-num">2</div>
       <div class="step-icon">⚡</div>
       <h3>PeakPilot runs every morning</h3>
-      <p>At 8am, PeakPilot reads each athlete's recovery data and cross-references it with their plan for the day.</p>
+      <p>Every morning at the time each athlete chooses, PeakPilot reads their recovery data and cross-references it with their plan for the day.</p>
     </div>
     <div class="step">
       <div class="step-num">3</div>
@@ -403,11 +403,172 @@
   </div>
 </section>
 
+<!-- BRIEFING PREVIEW (full) -->
+<div style="max-width:480px;margin:56px auto 0;padding:0 24px;">
+  <p style="text-align:center;font-size:12px;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;">What the athlete receives</p>
+  <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:20px;box-shadow:0 32px 64px rgba(0,0,0,0.5);">
+
+    <!-- header -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+      <div>
+        <p style="font-size:9px;color:#64748b;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">Garmin → AI · Daily briefing</p>
+        <p style="font-size:18px;font-weight:800;letter-spacing:-0.5px;">Briefing diário</p>
+      </div>
+      <span style="background:#1e3a5f;color:#60a5fa;font-size:11px;font-weight:600;padding:6px 12px;border-radius:16px;">Jun 4</span>
+    </div>
+
+    <!-- status badge -->
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:#f59e0b;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:12px;">
+      🟡 &nbsp; Treino com atenção
+    </div>
+
+    <!-- recommendation -->
+    <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);border-radius:10px;padding:12px 14px;margin-bottom:14px;">
+      <p style="font-size:9px;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Recomendação do dia</p>
+      <p style="font-size:12px;color:#e2e8f0;line-height:1.6;">Recuperação adequada com sono de 8.0h e VFC balanceada em 83ms. A carga da semana está elevada (7 treinos), mas a recuperação está sustentando — se treinar, mantenha intensidade baixa a moderada.</p>
+    </div>
+
+    <!-- 3 metric cards -->
+    <div style="display:flex;gap:6px;margin-bottom:14px;">
+      <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px;">
+        <p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Recuperação</p>
+        <p style="font-size:20px;font-weight:800;color:#f1f5f9;line-height:1;">83<span style="font-size:10px;font-weight:400;color:#64748b;">ms</span> <span style="font-size:13px;color:#22c55e;">→</span></p>
+        <p style="font-size:10px;font-weight:700;color:#22c55e;margin-top:4px;">Boa recuperação</p>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px;">
+        <p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Sono</p>
+        <p style="font-size:20px;font-weight:800;color:#f1f5f9;line-height:1;">8.0<span style="font-size:10px;font-weight:400;color:#64748b;">h</span> <span style="font-size:13px;color:#22c55e;">↑</span></p>
+        <p style="font-size:10px;font-weight:700;color:#22c55e;margin-top:4px;">Excelente</p>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px;">
+        <p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Energia</p>
+        <p style="font-size:20px;font-weight:800;color:#f1f5f9;line-height:1;">69<span style="font-size:10px;font-weight:400;color:#64748b;">pts</span></p>
+        <p style="font-size:10px;font-weight:700;color:#f59e0b;margin-top:4px;">Energia ok</p>
+      </div>
+    </div>
+
+    <!-- evolution section label -->
+    <p style="font-size:9px;color:#64748b;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Evolução dos últimos 7 dias</p>
+
+    <!-- HRV chart -->
+    <p style="font-size:9px;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Recuperação (HRV) →</p>
+    <table width="100%" cellpadding="0" cellspacing="2" style="margin-bottom:14px;">
+    <tr>
+      <!-- day 1: 85ms green -->
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">85</p>
+        <div style="height:38px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">28/05</p>
+      </td>
+      <!-- day 2: 93ms green -->
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">93</p>
+        <div style="height:52px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">29/05</p>
+      </td>
+      <!-- day 3: 86ms green -->
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">86</p>
+        <div style="height:40px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">30/05</p>
+      </td>
+      <!-- day 4: 70ms red (below baseline) -->
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#f87171;">70</p>
+        <div style="height:16px;background:#f87171;border-radius:2px 2px 0 0;"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#f87171;">31/05</p>
+      </td>
+      <!-- day 5: 87ms green -->
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">87</p>
+        <div style="height:42px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">1/06</p>
+      </td>
+      <!-- day 6: 85ms green -->
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">85</p>
+        <div style="height:38px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">2/06</p>
+      </td>
+      <!-- day 7: 83ms TODAY amber -->
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#fbbf24;font-weight:bold;">83</p>
+        <div style="height:35px;background:#fbbf24;border-radius:2px 2px 0 0;box-shadow:0 0 6px rgba(251,191,36,0.4);"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#fbbf24;font-weight:bold;">hoje</p>
+      </td>
+    </tr>
+    </table>
+    <p style="font-size:8px;color:#475569;text-align:right;margin-bottom:14px;">baseline 77–104ms</p>
+
+    <!-- Sono chart -->
+    <p style="font-size:9px;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Sono ↑</p>
+    <table width="100%" cellpadding="0" cellspacing="2" style="margin-bottom:6px;">
+    <tr>
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">7.5h</p>
+        <div style="height:36px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">28/05</p>
+        <p style="margin:1px 0 0;font-size:7px;color:#475569;">89pts</p>
+      </td>
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">7.8h</p>
+        <div style="height:42px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">29/05</p>
+        <p style="margin:1px 0 0;font-size:7px;color:#475569;">93pts</p>
+      </td>
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">6.9h</p>
+        <div style="height:20px;background:#94a3b8;border-radius:2px 2px 0 0;"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">30/05</p>
+        <p style="margin:1px 0 0;font-size:7px;color:#475569;">71pts</p>
+      </td>
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">7.5h</p>
+        <div style="height:36px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">31/05</p>
+        <p style="margin:1px 0 0;font-size:7px;color:#475569;">79pts</p>
+      </td>
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">7.1h</p>
+        <div style="height:26px;background:#94a3b8;border-radius:2px 2px 0 0;"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">1/06</p>
+        <p style="margin:1px 0 0;font-size:7px;color:#475569;">73pts</p>
+      </td>
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">7.1h</p>
+        <div style="height:26px;background:#94a3b8;border-radius:2px 2px 0 0;"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">2/06</p>
+        <p style="margin:1px 0 0;font-size:7px;color:#475569;">80pts</p>
+      </td>
+      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
+        <p style="margin:0 0 2px;font-size:8px;color:#fbbf24;font-weight:bold;">8.0h</p>
+        <div style="height:48px;background:#fbbf24;border-radius:2px 2px 0 0;box-shadow:0 0 6px rgba(251,191,36,0.4);"></div>
+        <p style="margin:3px 0 0;font-size:8px;color:#fbbf24;font-weight:bold;">hoje</p>
+        <p style="margin:1px 0 0;font-size:7px;color:#fbbf24;">86pts</p>
+      </td>
+    </tr>
+    </table>
+    <p style="font-size:8px;color:#475569;text-align:right;margin-bottom:14px;">ideal: ≥ 7.5h</p>
+
+    <!-- last workout -->
+    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:12px 14px;">
+      <p style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">Último treino · ontem (02/06)</p>
+      <p style="font-size:14px;font-weight:700;color:#f1f5f9;margin-bottom:8px;">🚴 Ciclismo (Zwift)</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div><p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;">Distância</p><p style="font-size:14px;font-weight:700;color:#e2e8f0;">31.3 km</p></div>
+        <div><p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;">FC Média</p><p style="font-size:14px;font-weight:700;color:#e2e8f0;">117 bpm</p></div>
+        <div><p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;">Duração</p><p style="font-size:14px;font-weight:700;color:#e2e8f0;">1h00</p></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- METRICS -->
 <div class="metrics-strip">
   <div class="metric-block">
-    <div class="metric-block-val">8am</div>
-    <div class="metric-block-label">Delivered every morning</div>
+    <div class="metric-block-val">⏱</div>
+    <div class="metric-block-label">Athlete chooses delivery time</div>
   </div>
   <div class="metric-block">
     <div class="metric-block-val">3</div>
