@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PeakPilot — The intelligence layer for your coaching business</title>
+  <meta name="description" content="PeakPilot delivers AI-powered daily training briefings to athletes, powered by Garmin and TrainingPeaks data. Built for endurance coaching businesses.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0f1e;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* Subtle gradient background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at 60% 40%, rgba(59,130,246,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 30% 70%, rgba(16,185,129,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Logo / Brand mark */
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #3b82f6, #10b981);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .logo-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #f1f5f9;
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-block;
+      background: rgba(59,130,246,0.12);
+      border: 1px solid rgba(59,130,246,0.3);
+      color: #60a5fa;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+    }
+
+    /* Headline */
+    h1 {
+      font-size: clamp(28px, 6vw, 42px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      color: #f1f5f9;
+      margin-bottom: 20px;
+    }
+
+    h1 span {
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Subtext */
+    .subtitle {
+      font-size: 17px;
+      color: #64748b;
+      line-height: 1.7;
+      margin-bottom: 48px;
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Email form */
+    .form {
+      display: flex;
+      gap: 8px;
+      max-width: 420px;
+      margin: 0 auto 20px;
+    }
+
+    .form input {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 14px;
+      color: #f1f5f9;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form input::placeholder { color: #475569; }
+    .form input:focus { border-color: rgba(59,130,246,0.5); }
+
+    .form button {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 13px 22px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .form button:hover { opacity: 0.9; }
+
+    .form-note {
+      font-size: 12px;
+      color: #334155;
+      margin-bottom: 56px;
+    }
+
+    /* Divider */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 0 auto 40px;
+    }
+
+    /* Integrations */
+    .integrations {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #475569;
+      margin-bottom: 48px;
+    }
+
+    .int-badge {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    /* Features */
+    .features {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .feature {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 16px 20px;
+      text-align: left;
+      width: calc(50% - 6px);
+      min-width: 180px;
+    }
+
+    .feature-icon { font-size: 20px; margin-bottom: 8px; }
+    .feature-title { font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 4px; }
+    .feature-text { font-size: 12px; color: #475569; line-height: 1.5; }
+
+    /* Footer */
+    footer {
+      font-size: 12px;
+      color: #1e293b;
+    }
+
+    @media (max-width: 480px) {
+      .form { flex-direction: column; }
+      .feature { width: 100%; }
+      .logo { margin-bottom: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Logo -->
+    <div class="logo">
+      <div class="logo-icon">⚡</div>
+      <span class="logo-name">PeakPilot</span>
+    </div>
+
+    <!-- Badge -->
+    <div class="badge">Coming Soon</div>
+
+    <!-- Headline -->
+    <h1>The intelligence layer for<br><span>your coaching business</span></h1>
+
+    <!-- Subtitle -->
+    <p class="subtitle">
+      PeakPilot delivers AI-powered daily briefings to your athletes — combining Garmin biometrics and TrainingPeaks training data into one clear, personalized message every morning.
+    </p>
+
+    <!-- Email capture -->
+    <form class="form" onsubmit="handleSubmit(event)">
+      <input type="email" id="email" placeholder="your@email.com" required>
+      <button type="submit">Get early access</button>
+    </form>
+    <p class="form-note">For coaches and assessorias. No spam, ever.</p>
+
+    <!-- Integrations -->
+    <div class="integrations">
+      <span>Powered by</span>
+      <span class="int-badge">Garmin Connect</span>
+      <span>+</span>
+      <span class="int-badge">TrainingPeaks</span>
+      <span>+</span>
+      <span class="int-badge">AI</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Features -->
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Daily athlete briefing</div>
+        <div class="feature-text">Recovery, load and today's recommendation — delivered at 8am.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📅</div>
+        <div class="feature-title">Weekly summary</div>
+        <div class="feature-text">Trends in HRV, sleep and training compliance for the week.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Plan vs. actual</div>
+        <div class="feature-text">How well each athlete is executing the coach's plan.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">👥</div>
+        <div class="feature-title">Built for coaches</div>
+        <div class="feature-text">One subscription, all your athletes. Your brand, your experience.</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      &copy; 2026 PeakPilot &nbsp;&middot;&nbsp; contact@peakpilot.com.br
+    </footer>
+
+  </div>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'You\'re on the list!';
+      btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+      btn.disabled = true;
+      // TODO: integrate with email list (Mailchimp, ConvertKit, etc.)
+      console.log('Email captured:', email);
+    }
+  </script>
+</body>
+</html>
