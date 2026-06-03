@@ -53,7 +53,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 140px 24px 80px;
+      padding: 120px 24px 80px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -320,17 +320,103 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">
-    <span class="hero-badge-dot"></span>
-    Now in early access
+
+  <!-- two-column layout -->
+  <div style="display:flex;align-items:center;gap:56px;max-width:1040px;width:100%;flex-wrap:wrap;justify-content:center;">
+
+    <!-- LEFT: text -->
+    <div style="flex:1;min-width:280px;max-width:480px;text-align:left;">
+      <div class="hero-badge" style="margin-bottom:24px;">
+        <span class="hero-badge-dot"></span>
+        Now in early access
+      </div>
+      <h1 style="text-align:left;">Every athlete.<br><em>Every morning.</em><br>Personalized.</h1>
+      <p class="hero-sub" style="text-align:left;margin:16px 0 32px;">
+        PeakPilot sends each of your athletes a daily AI briefing — combining their Garmin recovery data with their TrainingPeaks training plan. So they know exactly how to train today.
+      </p>
+      <div class="hero-cta-row" style="justify-content:flex-start;">
+        <a href="#waitlist" class="btn-primary">Request early access</a>
+        <a href="#how" class="btn-secondary">See how it works ↓</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: compact briefing mockup -->
+    <div style="flex:1;min-width:260px;max-width:320px;position:relative;">
+      <div style="position:absolute;inset:-20px;background:radial-gradient(ellipse at center,rgba(59,130,246,0.12) 0%,transparent 70%);border-radius:24px;pointer-events:none;"></div>
+      <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:18px;box-shadow:0 32px 64px rgba(0,0,0,0.6);position:relative;">
+        <p style="font-size:9px;color:#64748b;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Garmin → AI · Daily briefing</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <p style="font-size:17px;font-weight:800;letter-spacing:-0.5px;">Briefing diário</p>
+          <span style="background:#1e3a5f;color:#60a5fa;font-size:10px;font-weight:600;padding:4px 10px;border-radius:12px;">Jun 4</span>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:5px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:#f59e0b;font-size:11px;font-weight:700;padding:4px 10px;border-radius:16px;margin-bottom:10px;">
+          🟡 &nbsp;Treino com atenção
+        </div>
+        <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:10px 12px;margin-bottom:12px;">
+          <p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Recomendação</p>
+          <p style="font-size:11px;color:#e2e8f0;line-height:1.55;">Recuperação adequada com sono de 8.0h. Carga elevada (7 treinos) — mantenha intensidade baixa a moderada.</p>
+        </div>
+        <!-- mini metrics -->
+        <div style="display:flex;gap:5px;margin-bottom:12px;">
+          <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:8px;">
+            <p style="font-size:7px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Recuperação</p>
+            <p style="font-size:16px;font-weight:800;color:#f1f5f9;line-height:1;">83<span style="font-size:9px;color:#64748b;">ms</span></p>
+            <p style="font-size:9px;color:#22c55e;font-weight:700;margin-top:2px;">Balanceado</p>
+          </div>
+          <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:8px;">
+            <p style="font-size:7px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Sono</p>
+            <p style="font-size:16px;font-weight:800;color:#f1f5f9;line-height:1;">8.0<span style="font-size:9px;color:#64748b;">h</span></p>
+            <p style="font-size:9px;color:#22c55e;font-weight:700;margin-top:2px;">Excelente</p>
+          </div>
+          <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:8px;">
+            <p style="font-size:7px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Energia</p>
+            <p style="font-size:16px;font-weight:800;color:#f1f5f9;line-height:1;">69<span style="font-size:9px;color:#64748b;">pts</span></p>
+            <p style="font-size:9px;color:#f59e0b;font-weight:700;margin-top:2px;">Energia ok</p>
+          </div>
+        </div>
+        <!-- mini hrv bars -->
+        <p style="font-size:7px;color:#64748b;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Recuperação 7 dias</p>
+        <table width="100%" cellpadding="0" cellspacing="1">
+        <tr>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;">
+            <div style="height:22px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+            <p style="margin:2px 0 0;font-size:7px;color:#475569;">28/05</p>
+          </td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;">
+            <div style="height:30px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+            <p style="margin:2px 0 0;font-size:7px;color:#475569;">29/05</p>
+          </td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;">
+            <div style="height:24px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+            <p style="margin:2px 0 0;font-size:7px;color:#475569;">30/05</p>
+          </td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;">
+            <div style="height:8px;background:#f87171;border-radius:2px 2px 0 0;"></div>
+            <p style="margin:2px 0 0;font-size:7px;color:#f87171;">31/05</p>
+          </td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;">
+            <div style="height:25px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+            <p style="margin:2px 0 0;font-size:7px;color:#475569;">1/06</p>
+          </td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;">
+            <div style="height:22px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
+            <p style="margin:2px 0 0;font-size:7px;color:#475569;">2/06</p>
+          </td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;">
+            <div style="height:20px;background:#fbbf24;border-radius:2px 2px 0 0;box-shadow:0 0 5px rgba(251,191,36,0.4);"></div>
+            <p style="margin:2px 0 0;font-size:7px;color:#fbbf24;font-weight:bold;">hoje</p>
+          </td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
   </div>
-  <h1>Every athlete.<br><em>Every morning.</em><br>Personalized.</h1>
-  <p class="hero-sub">
-    PeakPilot sends each of your athletes a daily AI briefing — combining their Garmin recovery data with their TrainingPeaks training plan. So they know exactly how to train today.
-  </p>
-  <div class="hero-cta-row">
-    <a href="#waitlist" class="btn-primary">Request early access</a>
-    <a href="#how" class="btn-secondary">See how it works ↓</a>
+
+  <!-- scroll hint -->
+  <div style="margin-top:48px;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0.4;">
+    <p style="font-size:11px;color:#64748b;letter-spacing:1px;">scroll</p>
+    <div style="width:1px;height:32px;background:linear-gradient(180deg,#64748b,transparent);"></div>
   </div>
 
 </div>
