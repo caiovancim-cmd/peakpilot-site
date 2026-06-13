@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PeakPilot — Todo atleta. Todo dia. Personalizado.</title>
-  <meta name="description" content="PeakPilot envia para cada atleta um briefing diário com IA — combinando dados de recuperação e treinos do plano do coach. Feito para assessorias esportivas.">
+  <title>PeakPilot — Seu briefing de recuperação, toda manhã no email</title>
+  <meta name="description" content="Um email diário com sono, HRV e carga de treino — lido direto do Garmin. Comecei como um projeto pessoal: começar o dia sabendo como meu corpo recuperou, sem abrir o app.">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -48,19 +48,9 @@
     .nav-cta:hover { opacity:0.9; }
 
     /* ── HERO ── */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 120px 24px 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+    .hero { padding: 120px 24px 72px; position: relative; overflow: hidden; }
     .hero::before {
-      content:'';
-      position:absolute; inset:0;
+      content:''; position:absolute; inset:0;
       background:
         radial-gradient(ellipse 70% 50% at 50% 0%, rgba(59,130,246,0.10) 0%, transparent 70%),
         radial-gradient(ellipse 40% 40% at 80% 80%, rgba(34,197,94,0.06) 0%, transparent 60%);
@@ -70,238 +60,88 @@
       display:inline-flex; align-items:center; gap:6px;
       background:var(--blue-dim); border:1px solid rgba(59,130,246,0.25);
       color:#93c5fd; font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase;
-      padding:6px 14px; border-radius:20px; margin-bottom:28px;
+      padding:6px 14px; border-radius:20px; margin-bottom:24px;
     }
     .hero-badge-dot { width:6px; height:6px; background:var(--green); border-radius:50%; }
     h1 {
-      font-size: clamp(32px, 6vw, 58px);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -2px;
-      max-width: 760px;
-      margin-bottom: 20px;
+      font-size: clamp(30px, 5.4vw, 54px);
+      font-weight: 900; line-height: 1.08; letter-spacing: -2px;
+      max-width: 580px; margin-bottom: 18px;
     }
     h1 em { font-style:normal; color: var(--blue); }
     .hero-sub {
-      font-size: clamp(16px, 2vw, 19px);
-      color: var(--muted);
-      max-width: 520px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
+      font-size: clamp(16px, 2vw, 19px); color: var(--muted);
+      max-width: 480px; margin: 0 0 32px; line-height: 1.7;
     }
-    .hero-cta-row {
-      display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
-      margin-bottom: 64px;
-    }
+    .hero-cta-row { display:flex; gap:12px; flex-wrap:wrap; }
     .btn-primary {
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 14px 28px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      transition: opacity .2s;
+      background: var(--blue); color: #fff; border: none; border-radius: 10px;
+      padding: 14px 28px; font-size: 15px; font-weight: 700; cursor: pointer;
+      text-decoration: none; transition: opacity .2s;
     }
     .btn-primary:hover { opacity: .9; }
     .btn-secondary {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--subtle);
-      border-radius: 10px;
-      padding: 14px 28px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color .2s, color .2s;
+      background: transparent; color: var(--muted); border: 1px solid var(--subtle);
+      border-radius: 10px; padding: 14px 28px; font-size: 15px; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: border-color .2s, color .2s;
     }
     .btn-secondary:hover { border-color: var(--blue); color: var(--text); }
 
-    /* ── BRIEFING MOCKUP ── */
-    .mockup-wrap {
-      width: 100%;
-      max-width: 400px;
-      margin: 0 auto;
-      position: relative;
-    }
-    .mockup-wrap::before {
-      content: '';
-      position: absolute;
-      top: -20px; left: -20px; right: -20px; bottom: -20px;
-      background: radial-gradient(ellipse at center, rgba(59,130,246,0.12) 0%, transparent 70%);
-      border-radius: 24px;
-    }
-    .briefing-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 20px;
-      text-align: left;
-      position: relative;
-      box-shadow: 0 32px 64px rgba(0,0,0,0.6);
-    }
-    .bc-eyebrow { font-size:10px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:10px; }
-    .bc-title { font-size:20px; font-weight:800; margin-bottom:4px; letter-spacing:-0.5px; }
-    .bc-date { font-size:11px; color:var(--muted); margin-bottom:14px; }
-    .bc-badge {
-      display:inline-flex; align-items:center; gap:6px;
-      background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3);
-      color:var(--amber); font-size:12px; font-weight:700;
-      padding:6px 12px; border-radius:20px; margin-bottom:14px;
-    }
-    .bc-rec {
-      background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.15);
-      border-radius:10px; padding:12px 14px; margin-bottom:14px;
-    }
-    .bc-rec-label { font-size:9px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:6px; }
-    .bc-rec-text { font-size:12px; color:#e2e8f0; line-height:1.6; }
-    .bc-metrics { display:flex; gap:8px; }
-    .bc-metric {
-      flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--border);
-      border-radius:10px; padding:10px 10px 8px;
-    }
-    .bc-metric-label { font-size:8px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
-    .bc-metric-val { font-size:18px; font-weight:800; line-height:1; }
-    .bc-metric-status { font-size:10px; font-weight:700; margin-top:4px; }
-
-    /* ── POWERED BY ── */
-    .powered {
-      padding: 32px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: rgba(255,255,255,0.015);
-    }
-    .powered-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; }
-    .powered-badge {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px 16px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--muted);
-    }
-
     /* ── SECTIONS ── */
-    section { padding: 96px 24px; max-width: 1000px; margin: 0 auto; }
-    .section-label {
-      font-size: 11px; font-weight: 700; color: var(--blue);
-      letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 16px;
-    }
-    h2 {
-      font-size: clamp(26px, 4vw, 40px);
-      font-weight: 800;
-      letter-spacing: -1px;
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
+    section { padding: 80px 24px; max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 11px; font-weight: 700; color: var(--blue); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 16px; }
+    h2 { font-size: clamp(24px, 4vw, 38px); font-weight: 800; letter-spacing: -1px; line-height: 1.2; margin-bottom: 16px; }
     h2 em { font-style:normal; color:var(--blue); }
-    .section-sub { font-size:17px; color:var(--muted); max-width:520px; margin-bottom:56px; }
+    .section-sub { font-size:17px; color:var(--muted); max-width:560px; margin-bottom:48px; line-height:1.7; }
+
+    /* ── STORY ── */
+    .story { border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:rgba(255,255,255,0.015); }
+    .story-inner { max-width:680px; margin:0 auto; padding:64px 24px; }
+    .story-inner p { font-size:18px; color:#cbd5e1; line-height:1.8; margin-bottom:18px; }
+    .story-inner p:last-child { margin-bottom:0; }
+    .story-inner strong { color:var(--text); font-weight:700; }
 
     /* ── HOW IT WORKS ── */
     .steps { display:flex; gap:24px; flex-wrap:wrap; }
-    .step {
-      flex: 1;
-      min-width: 240px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 24px;
-      position: relative;
-    }
-    .step-num {
-      width:32px; height:32px; border-radius:50%;
-      background:var(--blue-dim); border:1px solid rgba(59,130,246,0.3);
-      color:var(--blue); font-size:13px; font-weight:800;
-      display:flex; align-items:center; justify-content:center;
-      margin-bottom:16px;
-    }
-    .step-icon { font-size:28px; margin-bottom:12px; }
+    .step { flex:1; min-width:240px; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:28px 24px; }
+    .step-num { width:32px; height:32px; border-radius:50%; background:var(--blue-dim); border:1px solid rgba(59,130,246,0.3); color:var(--blue); font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+    .step-icon { font-size:26px; margin-bottom:12px; }
     .step h3 { font-size:16px; font-weight:800; margin-bottom:8px; }
     .step p { font-size:13px; color:var(--muted); line-height:1.6; }
 
-    /* ── FOR COACHES / FOR ATHLETES ── */
-    .personas { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-    .persona {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-    }
-    .persona-for { font-size:11px; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:16px; }
-    .persona-for.coach { color:#818cf8; }
-    .persona-for.athlete { color:var(--green); }
-    .persona h3 { font-size:22px; font-weight:800; margin-bottom:12px; letter-spacing:-0.5px; }
-    .persona p { font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:20px; }
-    .persona-features { list-style:none; display:flex; flex-direction:column; gap:10px; }
-    .persona-features li {
-      display:flex; align-items:flex-start; gap:10px;
-      font-size:14px; color:#cbd5e1;
-    }
-    .pf-icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+    /* ── FEATURES ── */
+    .features { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .feature { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:22px 22px; display:flex; gap:14px; align-items:flex-start; }
+    .feature-icon { font-size:22px; flex-shrink:0; line-height:1.3; }
+    .feature h3 { font-size:15px; font-weight:800; margin-bottom:4px; }
+    .feature p { font-size:13px; color:var(--muted); line-height:1.6; }
 
-    /* ── METRICS STRIP ── */
-    .metrics-strip {
-      display:flex; gap:1px;
-      background:var(--border);
-      border-radius:16px;
-      overflow:hidden;
-      margin: 0 24px;
-    }
-    .metric-block {
-      flex:1; background:var(--card); padding:28px 24px; text-align:center;
-    }
-    .metric-block-val { font-size:36px; font-weight:900; letter-spacing:-1px; color:var(--blue); }
-    .metric-block-label { font-size:13px; color:var(--muted); margin-top:6px; }
-
-    /* ── CTA SECTION ── */
-    .cta-section {
-      text-align: center;
-      padding: 96px 24px;
-      background: linear-gradient(180deg, transparent 0%, rgba(59,130,246,0.04) 100%);
-      border-top: 1px solid var(--border);
-    }
+    /* ── CTA ── */
+    .cta-section { text-align:center; padding:80px 24px; background:linear-gradient(180deg, transparent 0%, rgba(59,130,246,0.04) 100%); border-top:1px solid var(--border); }
     .cta-section h2 { margin-bottom:12px; }
-    .cta-section p { color:var(--muted); font-size:17px; margin-bottom:40px; max-width:440px; margin-left:auto; margin-right:auto; }
-    .email-form { display:flex; gap:10px; justify-content:center; max-width:440px; margin:0 auto 12px; flex-wrap:wrap; }
-    .email-form input {
-      flex:1; min-width:200px;
-      background:var(--card); border:1px solid var(--subtle);
-      border-radius:10px; padding:13px 16px;
-      font-size:14px; color:var(--text); outline:none;
-      transition: border-color .2s;
-    }
-    .email-form input::placeholder { color:var(--muted); }
-    .email-form input:focus { border-color:var(--blue); }
-    .form-note { font-size:12px; color:var(--subtle); }
+    .cta-section p { color:var(--muted); font-size:17px; margin:0 auto 36px; max-width:480px; line-height:1.7; }
+    .form-note { font-size:12px; color:var(--subtle); margin-top:14px; }
+
+    /* ── POWERED ── */
+    .powered { padding:28px 24px; display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:rgba(255,255,255,0.015); }
+    .powered-label { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; }
+    .powered-badge { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:8px 16px; font-size:13px; font-weight:600; color:var(--muted); }
 
     /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 24px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
+    footer { border-top:1px solid var(--border); padding:24px 32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
     footer .logo { font-size:15px; font-weight:800; display:flex; align-items:center; gap:8px; }
     footer p { font-size:12px; color:var(--subtle); }
 
-    /* ── RESPONSIVE ── */
+    /* ── BRIEFING PREVIEW (tema claro, igual ao email real) ── */
+    .mail { max-width:440px; margin:0 auto; background:#ffffff; border-radius:18px; overflow:hidden; box-shadow:0 32px 64px rgba(0,0,0,0.5); font-family:Arial,sans-serif; }
+    .mail-pad { padding:0 22px; }
+    .lbl { font-size:10px; font-weight:700; color:#64748b; letter-spacing:2px; text-transform:uppercase; }
+    .cell { background:#f8fafc; vertical-align:top; }
+    .num { font-size:20px; font-weight:800; color:#0f172a; line-height:1; }
+
     @media (max-width: 640px) {
       nav { padding: 14px 20px; }
-      .personas { grid-template-columns: 1fr; }
-      .metrics-strip { flex-direction:column; margin:0 16px; }
-      .metric-block { border-bottom:1px solid var(--border); }
+      .features { grid-template-columns: 1fr; }
       .steps { flex-direction: column; }
       footer { flex-direction:column; text-align:center; }
     }
@@ -315,365 +155,252 @@
     <div class="nav-logo-icon">⚡</div>
     PeakPilot
   </div>
-  <a href="#waitlist" class="nav-cta">Solicitar acesso</a>
+  <a href="#briefing" class="nav-cta">Ver um briefing</a>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
+  <div style="display:flex;align-items:center;gap:56px;max-width:1040px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
 
-  <!-- two-column layout -->
-  <div style="display:flex;align-items:center;gap:56px;max-width:1040px;width:100%;flex-wrap:wrap;justify-content:center;">
-
-    <!-- LEFT: text -->
-    <div style="flex:1;min-width:280px;max-width:480px;text-align:left;">
-      <div class="hero-badge" style="margin-bottom:24px;">
+    <!-- LEFT -->
+    <div style="flex:1;min-width:280px;max-width:500px;">
+      <div class="hero-badge">
         <span class="hero-badge-dot"></span>
-        Em acesso antecipado
+        Projeto pessoal
       </div>
-      <h1 style="text-align:left;">Todo atleta.<br><em>Todo dia.</em><br>Personalizado.</h1>
-      <p class="hero-sub" style="text-align:left;margin:16px 0 32px;">
-        PeakPilot envia para cada atleta um briefing diário com IA — combinando dados de recuperação com o plano de treino do coach. Para que saibam exatamente como treinar hoje.
+      <h1>Comece o dia sabendo <em>como seu corpo recuperou.</em></h1>
+      <p class="hero-sub">
+        Um email diário com seu sono, HRV e carga de treino. Lido direto do Garmin. Sem abrir aplicativo.
       </p>
-      <div class="hero-cta-row" style="justify-content:flex-start;">
-        <a href="#waitlist" class="btn-primary">Solicitar acesso antecipado</a>
-        <a href="#how" class="btn-secondary">Como funciona ↓</a>
+      <div class="hero-cta-row">
+        <a href="#briefing" class="btn-primary">Ver um briefing real ↓</a>
+        <a href="#how" class="btn-secondary">Como funciona</a>
       </div>
     </div>
 
-    <!-- RIGHT: compact briefing mockup -->
-    <div style="flex:1;min-width:260px;max-width:320px;position:relative;">
+    <!-- RIGHT: mini preview -->
+    <div style="flex:1;min-width:260px;max-width:300px;position:relative;">
       <div style="position:absolute;inset:-20px;background:radial-gradient(ellipse at center,rgba(59,130,246,0.12) 0%,transparent 70%);border-radius:24px;pointer-events:none;"></div>
-      <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:18px;box-shadow:0 32px 64px rgba(0,0,0,0.6);position:relative;">
-        <p style="font-size:9px;color:#64748b;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">IA · Briefing diário</p>
+      <div style="background:#ffffff;border-radius:18px;padding:18px;box-shadow:0 32px 64px rgba(0,0,0,0.6);position:relative;font-family:Arial,sans-serif;">
+        <p style="font-size:9px;color:#64748b;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">Briefing diário</p>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-          <p style="font-size:17px;font-weight:800;letter-spacing:-0.5px;">Briefing diário</p>
-          <span style="background:#1e3a5f;color:#60a5fa;font-size:10px;font-weight:600;padding:4px 10px;border-radius:12px;">Jun 4</span>
+          <p style="font-size:17px;font-weight:800;color:#0f172a;letter-spacing:-0.5px;">Como você está</p>
+          <span style="background:#dbeafe;color:#2563eb;font-size:10px;font-weight:600;padding:4px 10px;border-radius:12px;">hoje</span>
         </div>
-        <div style="display:inline-flex;align-items:center;gap:5px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:#f59e0b;font-size:11px;font-weight:700;padding:4px 10px;border-radius:16px;margin-bottom:10px;">
-          🟡 &nbsp;Treino com atenção
-        </div>
-        <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:10px 12px;margin-bottom:12px;">
-          <p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Recomendação</p>
-          <p style="font-size:11px;color:#e2e8f0;line-height:1.55;">Recuperação adequada com sono de 8.0h. Carga elevada (7 treinos) — mantenha intensidade baixa a moderada.</p>
-        </div>
-        <!-- mini metrics -->
-        <div style="display:flex;gap:5px;margin-bottom:12px;">
-          <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:8px;">
-            <p style="font-size:7px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Recuperação</p>
-            <p style="font-size:16px;font-weight:800;color:#f1f5f9;line-height:1;">83<span style="font-size:9px;color:#64748b;">ms</span></p>
-            <p style="font-size:9px;color:#22c55e;font-weight:700;margin-top:2px;">Balanceado</p>
+        <div style="display:flex;gap:6px;">
+          <div style="flex:1;background:#f8fafc;border:1px solid rgba(15,23,42,0.08);border-radius:10px;padding:9px;">
+            <p style="font-size:7px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">HRV</p>
+            <p style="font-size:16px;font-weight:800;color:#0f172a;line-height:1;">82<span style="font-size:9px;color:#64748b;">ms</span></p>
+            <p style="font-size:9px;color:#16a34a;font-weight:700;margin-top:3px;">Na faixa</p>
           </div>
-          <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:8px;">
-            <p style="font-size:7px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Sono</p>
-            <p style="font-size:16px;font-weight:800;color:#f1f5f9;line-height:1;">8.0<span style="font-size:9px;color:#64748b;">h</span></p>
-            <p style="font-size:9px;color:#22c55e;font-weight:700;margin-top:2px;">Excelente</p>
+          <div style="flex:1;background:#f8fafc;border:1px solid rgba(15,23,42,0.08);border-radius:10px;padding:9px;">
+            <p style="font-size:7px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Sono</p>
+            <p style="font-size:16px;font-weight:800;color:#0f172a;line-height:1;">8.1<span style="font-size:9px;color:#64748b;">h</span></p>
+            <p style="font-size:9px;color:#16a34a;font-weight:700;margin-top:3px;">Bom</p>
           </div>
-          <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:8px;">
-            <p style="font-size:7px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Energia</p>
-            <p style="font-size:16px;font-weight:800;color:#f1f5f9;line-height:1;">69<span style="font-size:9px;color:#64748b;">pts</span></p>
-            <p style="font-size:9px;color:#f59e0b;font-weight:700;margin-top:2px;">Energia ok</p>
+          <div style="flex:1;background:#f8fafc;border:1px solid rgba(15,23,42,0.08);border-radius:10px;padding:9px;">
+            <p style="font-size:7px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Energia</p>
+            <p style="font-size:16px;font-weight:800;color:#0f172a;line-height:1;">75<span style="font-size:9px;color:#64748b;">pts</span></p>
+            <p style="font-size:9px;color:#16a34a;font-weight:700;margin-top:3px;">Alta</p>
           </div>
         </div>
-        <!-- mini hrv bars -->
-        <p style="font-size:7px;color:#64748b;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Recuperação 7 dias</p>
-        <table width="100%" cellpadding="0" cellspacing="1">
-        <tr>
-          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-            <div style="height:22px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-          </td>
-          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-            <div style="height:30px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-          </td>
-          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-            <div style="height:24px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-          </td>
-          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-            <div style="height:8px;background:#f87171;border-radius:2px 2px 0 0;"></div>
-          </td>
-          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-            <div style="height:25px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-          </td>
-          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-            <div style="height:22px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-          </td>
-          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-            <div style="height:20px;background:#fbbf24;border-radius:2px 2px 0 0;box-shadow:0 0 5px rgba(251,191,36,0.4);"></div>
-          </td>
-        </tr>
-        </table>
       </div>
     </div>
 
   </div>
+</div>
 
-
+<!-- STORY -->
+<div class="story">
+  <div class="story-inner">
+    <div class="section-label">A origem</div>
+    <p>Sou triatleta amador e acompanho sono, HRV e carga de treino todos os dias. Reunir esses dados exigia abrir o Garmin e navegar por várias telas toda manhã.</p>
+    <p>O PeakPilot resolveu isso. Um processo automatizado lê os dados de madrugada e envia <strong>um único email</strong>: sono e suas fases, HRV comparado à linha de base, carga da semana e a evolução de 7 dias.</p>
+    <p>Não abro mais o Garmin pela manhã. <strong>Está tudo no email.</strong> Esta página mostra o resultado.</p>
+  </div>
 </div>
 
 <!-- HOW IT WORKS -->
-<section id="how" style="padding-top:48px;">
+<section id="how">
   <div class="section-label">Como funciona</div>
-  <h2>Três passos.<br><em>Zero trabalho extra.</em></h2>
-  <p class="section-sub">Configure uma vez. Seus atletas recebem um briefing personalizado toda manhã, automaticamente.</p>
+  <h2>Roda sozinho.<br><em>Você só lê.</em></h2>
+  <p class="section-sub">Configurado uma vez. O briefing chega todo dia, sem intervenção.</p>
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
-      <div class="step-icon">🔗</div>
-      <h3>Conecte seus atletas</h3>
-      <p>Cada atleta autoriza suas contas de dados de treino e recuperação. Leva dois minutos. Sem aplicativo para baixar.</p>
+      <div class="step-icon">🌙</div>
+      <h3>Coleta noturna</h3>
+      <p>O relógio Garmin registra sono, fases, HRV e recuperação durante a noite.</p>
     </div>
     <div class="step">
       <div class="step-num">2</div>
-      <div class="step-icon">⚡</div>
-      <h3>PeakPilot processa toda manhã</h3>
-      <p>No horário escolhido pelo atleta, o PeakPilot lê os dados de recuperação e cruza com o plano de treino do dia.</p>
+      <div class="step-icon">⚙️</div>
+      <h3>Processamento</h3>
+      <p>De manhã, o PeakPilot lê os dados e calcula tendências e baseline. O envio aguarda a sincronização do sono.</p>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-icon">📩</div>
-      <h3>Atleta recebe o briefing</h3>
-      <p>Uma mensagem personalizada chega: status de recuperação, intensidade recomendada para hoje e contexto do plano do coach.</p>
+      <h3>Entrega</h3>
+      <p>Um resumo direto na caixa de entrada. Sem aplicativo, sem login.</p>
     </div>
   </div>
 </section>
 
-<!-- BRIEFING PREVIEW (full) -->
-<div style="max-width:480px;margin:56px auto 56px;padding:0 24px;">
-  <p style="text-align:center;font-size:12px;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;">O que o atleta recebe</p>
-  <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:20px;box-shadow:0 32px 64px rgba(0,0,0,0.5);">
+<!-- BRIEFING PREVIEW -->
+<div id="briefing" style="padding:24px 24px 8px;">
+  <p style="text-align:center;font-size:12px;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px;">O email que chega todo dia</p>
+
+  <div class="mail">
 
     <!-- header -->
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
-      <div>
-        <p style="font-size:9px;color:#64748b;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">Garmin → AI · Daily briefing</p>
-        <p style="font-size:18px;font-weight:800;letter-spacing:-0.5px;">Briefing diário</p>
-      </div>
-      <span style="background:#1e3a5f;color:#60a5fa;font-size:11px;font-weight:600;padding:6px 12px;border-radius:16px;">Jun 4</span>
+    <div style="padding:22px 22px 18px;border-bottom:1px solid rgba(15,23,42,0.06);">
+      <p style="font-size:10px;color:#64748b;letter-spacing:2.5px;text-transform:uppercase;">Briefing diário</p>
+      <p style="font-size:24px;font-weight:800;color:#0f172a;letter-spacing:-0.5px;margin:5px 0 10px;">Como você está hoje</p>
+      <span style="display:inline-block;background:rgba(22,163,74,0.08);border:1px solid rgba(22,163,74,0.25);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;color:#16a34a;">🟢 &nbsp; Pronto para treinar</span>
     </div>
 
-    <!-- status badge -->
-    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:#f59e0b;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:12px;">
-      🟡 &nbsp; Treino com atenção
+    <!-- como está seu corpo -->
+    <div class="mail-pad" style="padding-top:18px;">
+      <p class="lbl" style="margin-bottom:12px;">Como está seu corpo</p>
+      <table width="100%" cellpadding="0" cellspacing="0" style="border-radius:14px;overflow:hidden;border:1px solid rgba(15,23,42,0.08);">
+      <tr>
+        <td class="cell" width="33%" style="padding:14px;border-right:1px solid rgba(15,23,42,0.08);">
+          <p style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;">Recuperação</p>
+          <p class="num" style="margin-top:6px;">82<span style="font-size:11px;font-weight:400;color:#64748b;">ms</span> <span style="font-size:13px;color:#16a34a;">↑</span></p>
+          <p style="font-size:11px;font-weight:700;color:#16a34a;margin-top:5px;">Boa recuperação</p>
+          <p style="font-size:10px;color:#94a3b8;margin-top:3px;">na faixa da baseline</p>
+        </td>
+        <td class="cell" width="33%" style="padding:14px;border-right:1px solid rgba(15,23,42,0.08);">
+          <p style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;">Sono</p>
+          <p class="num" style="margin-top:6px;">8.1<span style="font-size:11px;font-weight:400;color:#64748b;">h</span> <span style="font-size:13px;color:#16a34a;">↑</span></p>
+          <p style="font-size:11px;font-weight:700;color:#16a34a;margin-top:5px;">Bom</p>
+          <p style="font-size:10px;color:#94a3b8;margin-top:3px;">média 7d: 7.5h</p>
+        </td>
+        <td class="cell" width="33%" style="padding:14px;">
+          <p style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;">Energia</p>
+          <p class="num" style="margin-top:6px;">75<span style="font-size:11px;font-weight:400;color:#64748b;">pts</span></p>
+          <p style="font-size:11px;font-weight:700;color:#16a34a;margin-top:5px;">Alta energia</p>
+        </td>
+      </tr>
+      </table>
     </div>
 
-    <!-- recommendation -->
-    <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);border-radius:10px;padding:12px 14px;margin-bottom:14px;">
-      <p style="font-size:9px;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Recomendação do dia</p>
-      <p style="font-size:12px;color:#e2e8f0;line-height:1.6;">Recuperação adequada com sono de 8.0h e VFC balanceada em 83ms. A carga da semana está elevada (7 treinos), mas a recuperação está sustentando — se treinar, mantenha intensidade baixa a moderada.</p>
-    </div>
-
-    <!-- 3 metric cards -->
-    <div style="display:flex;gap:6px;margin-bottom:14px;">
-      <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px;">
-        <p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Recuperação</p>
-        <p style="font-size:20px;font-weight:800;color:#f1f5f9;line-height:1;">83<span style="font-size:10px;font-weight:400;color:#64748b;">ms</span> <span style="font-size:13px;color:#22c55e;">→</span></p>
-        <p style="font-size:10px;font-weight:700;color:#22c55e;margin-top:4px;">Boa recuperação</p>
-      </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px;">
-        <p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Sono</p>
-        <p style="font-size:20px;font-weight:800;color:#f1f5f9;line-height:1;">8.0<span style="font-size:10px;font-weight:400;color:#64748b;">h</span> <span style="font-size:13px;color:#22c55e;">↑</span></p>
-        <p style="font-size:10px;font-weight:700;color:#22c55e;margin-top:4px;">Excelente</p>
-      </div>
-      <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px;">
-        <p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Energia</p>
-        <p style="font-size:20px;font-weight:800;color:#f1f5f9;line-height:1;">69<span style="font-size:10px;font-weight:400;color:#64748b;">pts</span></p>
-        <p style="font-size:10px;font-weight:700;color:#f59e0b;margin-top:4px;">Energia ok</p>
+    <!-- detalhes do sono -->
+    <div class="mail-pad" style="padding-top:18px;">
+      <p class="lbl" style="color:#2563eb;margin-bottom:10px;">◆ Detalhes do sono · 8.1h</p>
+      <div style="border:1px solid rgba(37,99,235,0.25);border-radius:14px;padding:16px;background:#f6f9fe;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="border-radius:6px;overflow:hidden;height:22px;">
+          <tr>
+            <td style="width:18%;background:#1e3a8a;">&nbsp;</td>
+            <td style="width:24%;background:#7c3aed;">&nbsp;</td>
+            <td style="width:57%;background:#93c5fd;">&nbsp;</td>
+            <td style="width:1%;background:#cbd5e1;">&nbsp;</td>
+          </tr>
+        </table>
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:4px;">
+          <tr style="font-size:9px;color:#64748b;">
+            <td style="width:18%;">Profundo 1h28</td>
+            <td style="width:24%;">REM 1h57</td>
+            <td style="width:57%;">Leve 4h39</td>
+            <td style="width:1%;text-align:right;white-space:nowrap;">Ac. 0h01</td>
+          </tr>
+        </table>
       </div>
     </div>
 
-    <!-- divider -->
-    <div style="border-top:1px solid rgba(255,255,255,0.07);margin:16px 0;"></div>
+    <!-- evolução -->
+    <div class="mail-pad" style="padding-top:18px;">
+      <p class="lbl" style="margin-bottom:12px;">Evolução dos últimos 7 dias</p>
+      <div style="background:#f8fafc;border:1px solid rgba(15,23,42,0.08);border-radius:14px;padding:16px;">
 
-    <!-- evolution section label -->
-    <p style="font-size:9px;color:#64748b;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Evolução dos últimos 7 dias</p>
+        <p style="font-size:10px;font-weight:700;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Sono <span style="color:#16a34a;">↑</span></p>
+        <table width="100%" cellpadding="0" cellspacing="2">
+        <tr>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:22px;background:#dc2626;border-radius:3px 3px 0 0;"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;">07/06</p></td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:48px;background:#16a34a;border-radius:3px 3px 0 0;"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;">08/06</p></td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:24px;background:#dc2626;border-radius:3px 3px 0 0;"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;">09/06</p></td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:58px;background:#16a34a;border-radius:3px 3px 0 0;"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;">10/06</p></td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:54px;background:#16a34a;border-radius:3px 3px 0 0;"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;">11/06</p></td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:50px;background:#16a34a;border-radius:3px 3px 0 0;"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;">12/06</p></td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:64px;background:#16a34a;border-radius:3px 3px 0 0;box-shadow:0 0 6px rgba(22,163,74,0.35);"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;font-weight:bold;">13/06</p></td>
+        </tr>
+        </table>
+        <p style="font-size:8px;color:#475569;text-align:right;margin:8px 0 16px;"><span style="color:#16a34a;">■</span> na média ou acima &nbsp; <span style="color:#dc2626;">■</span> abaixo</p>
 
-    <!-- HRV chart -->
-    <p style="font-size:9px;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Recuperação (HRV) →</p>
-    <table width="100%" cellpadding="0" cellspacing="2" style="margin-bottom:14px;">
-    <tr>
-      <!-- day 1: 85ms green -->
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">85</p>
-        <div style="height:38px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">28/05</p>
-      </td>
-      <!-- day 2: 93ms green -->
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">93</p>
-        <div style="height:52px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">29/05</p>
-      </td>
-      <!-- day 3: 86ms green -->
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">86</p>
-        <div style="height:40px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">30/05</p>
-      </td>
-      <!-- day 4: 70ms red (below baseline) -->
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#f87171;">70</p>
-        <div style="height:16px;background:#f87171;border-radius:2px 2px 0 0;"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#f87171;">31/05</p>
-      </td>
-      <!-- day 5: 87ms green -->
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">87</p>
-        <div style="height:42px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">1/06</p>
-      </td>
-      <!-- day 6: 85ms green -->
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">85</p>
-        <div style="height:38px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">2/06</p>
-      </td>
-      <!-- day 7: 83ms TODAY amber -->
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#fbbf24;font-weight:bold;">83</p>
-        <div style="height:35px;background:#fbbf24;border-radius:2px 2px 0 0;box-shadow:0 0 6px rgba(251,191,36,0.4);"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#fbbf24;font-weight:bold;">hoje</p>
-      </td>
-    </tr>
-    </table>
-    <p style="font-size:8px;color:#475569;text-align:right;margin-bottom:20px;">baseline 77–104ms</p>
-
-    <!-- Sono chart -->
-    <p style="font-size:9px;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Sono ↑</p>
-    <table width="100%" cellpadding="0" cellspacing="2" style="margin-bottom:6px;">
-    <tr>
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">7.5h</p>
-        <div style="height:36px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">28/05</p>
-        <p style="margin:1px 0 0;font-size:7px;color:#475569;">89pts</p>
-      </td>
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">7.8h</p>
-        <div style="height:42px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">29/05</p>
-        <p style="margin:1px 0 0;font-size:7px;color:#475569;">93pts</p>
-      </td>
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">6.9h</p>
-        <div style="height:20px;background:#94a3b8;border-radius:2px 2px 0 0;"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">30/05</p>
-        <p style="margin:1px 0 0;font-size:7px;color:#475569;">71pts</p>
-      </td>
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">7.5h</p>
-        <div style="height:36px;background:#22c55e;border-radius:2px 2px 0 0;"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">31/05</p>
-        <p style="margin:1px 0 0;font-size:7px;color:#475569;">79pts</p>
-      </td>
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">7.1h</p>
-        <div style="height:26px;background:#94a3b8;border-radius:2px 2px 0 0;"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">1/06</p>
-        <p style="margin:1px 0 0;font-size:7px;color:#475569;">73pts</p>
-      </td>
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#64748b;">7.1h</p>
-        <div style="height:26px;background:#94a3b8;border-radius:2px 2px 0 0;"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#64748b;">2/06</p>
-        <p style="margin:1px 0 0;font-size:7px;color:#475569;">80pts</p>
-      </td>
-      <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;padding:0 1px;">
-        <p style="margin:0 0 2px;font-size:8px;color:#fbbf24;font-weight:bold;">8.0h</p>
-        <div style="height:48px;background:#fbbf24;border-radius:2px 2px 0 0;box-shadow:0 0 6px rgba(251,191,36,0.4);"></div>
-        <p style="margin:3px 0 0;font-size:8px;color:#fbbf24;font-weight:bold;">hoje</p>
-        <p style="margin:1px 0 0;font-size:7px;color:#fbbf24;">86pts</p>
-      </td>
-    </tr>
-    </table>
-    <p style="font-size:8px;color:#475569;text-align:right;margin-bottom:20px;">ideal: ≥ 7.5h</p>
-
-    <!-- divider -->
-    <div style="border-top:1px solid rgba(255,255,255,0.07);margin-bottom:16px;"></div>
-
-    <!-- last workout -->
-    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:12px 14px;">
-      <p style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">Último treino · ontem (02/06)</p>
-      <p style="font-size:14px;font-weight:700;color:#f1f5f9;margin-bottom:8px;">🚴 Ciclismo (Zwift)</p>
-      <div style="display:flex;gap:16px;flex-wrap:wrap;">
-        <div><p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;">Distância</p><p style="font-size:14px;font-weight:700;color:#e2e8f0;">31.3 km</p></div>
-        <div><p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;">FC Média</p><p style="font-size:14px;font-weight:700;color:#e2e8f0;">117 bpm</p></div>
-        <div><p style="font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px;">Duração</p><p style="font-size:14px;font-weight:700;color:#e2e8f0;">1h00</p></div>
+        <p style="font-size:10px;font-weight:700;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Recuperação (HRV) <span style="color:#16a34a;">↑</span></p>
+        <table width="100%" cellpadding="0" cellspacing="2">
+        <tr>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:54px;background:#16a34a;border-radius:3px 3px 0 0;"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;">07/06</p></td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:26px;background:#dc2626;border-radius:3px 3px 0 0;"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;">08/06</p></td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:44px;background:#16a34a;border-radius:3px 3px 0 0;"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;">09/06</p></td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:20px;background:#dc2626;border-radius:3px 3px 0 0;"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;">10/06</p></td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:50px;background:#16a34a;border-radius:3px 3px 0 0;"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;">11/06</p></td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:46px;background:#16a34a;border-radius:3px 3px 0 0;"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;">12/06</p></td>
+          <td width="14%" align="center" valign="bottom" style="vertical-align:bottom;"><div style="height:52px;background:#16a34a;border-radius:3px 3px 0 0;box-shadow:0 0 6px rgba(22,163,74,0.35);"></div><p style="margin:3px 0 0;font-size:8px;color:#64748b;font-weight:bold;">13/06</p></td>
+        </tr>
+        </table>
+        <p style="font-size:8px;color:#475569;text-align:right;margin-top:8px;"><span style="color:#16a34a;">■</span> dentro da baseline (76–102ms) &nbsp; <span style="color:#dc2626;">■</span> fora</p>
       </div>
+    </div>
+
+    <!-- carga -->
+    <div class="mail-pad" style="padding-top:16px;padding-bottom:20px;">
+      <div style="border:1px solid rgba(15,23,42,0.08);border-radius:12px;padding:11px 16px;background:#f8fafc;">
+        <p style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;">Carga de treino</p>
+        <p style="font-size:12px;color:#0f172a;"><strong style="color:#16a34a;">Equilibrada</strong> &nbsp;·&nbsp; TSS 7d: 600 &nbsp;·&nbsp; 3 treinos</p>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div style="border-top:1px solid rgba(15,23,42,0.06);padding:12px 22px;text-align:center;">
+      <p style="font-size:10px;color:#cbd5e1;margin-bottom:5px;">VO2max: 54 · Peso: 76kg</p>
+      <p style="font-size:11px;color:#94a3b8;">PeakPilot · Garmin Connect</p>
     </div>
 
   </div>
 </div>
 
-<!-- METRICS -->
-<div class="metrics-strip">
-  <div class="metric-block">
-    <div class="metric-block-val">⏱</div>
-    <div class="metric-block-label">Atleta escolhe o horário</div>
-  </div>
-  <div class="metric-block">
-    <div class="metric-block-val">3</div>
-    <div class="metric-block-label">Fontes de dados integradas</div>
-  </div>
-  <div class="metric-block">
-    <div class="metric-block-val">∞</div>
-    <div class="metric-block-label">Atletas por coach</div>
-  </div>
-  <div class="metric-block">
-    <div class="metric-block-val">0</div>
-    <div class="metric-block-label">Trabalho manual necessário</div>
-  </div>
-</div>
-
-<!-- FOR COACHES / FOR ATHLETES -->
+<!-- WHAT IT TRACKS -->
 <section>
-  <div class="section-label">Duas perspectivas</div>
-  <h2>Feito para coaches.<br><em>Amado por atletas.</em></h2>
-  <p class="section-sub">PeakPilot serve os dois lados da relação coach-atleta.</p>
-  <div class="personas">
-    <div class="persona">
-      <div class="persona-for coach">Para coaches</div>
-      <h3>Seus atletas sempre sabem o que fazer.</h3>
-      <p>Pare de responder "posso treinar hoje?". PeakPilot cuida da orientação diária para você focar no plano, não nas perguntas.</p>
-      <ul class="persona-features">
-        <li><span class="pf-icon">📊</span> Resumo semanal de todos os atletas em um só lugar</li>
-        <li><span class="pf-icon">🔴</span> Alertas automáticos quando um atleta está em risco</li>
-        <li><span class="pf-icon">🎯</span> Compliance com o plano rastreado automaticamente</li>
-        <li><span class="pf-icon">💼</span> Diferencie sua assessoria da concorrência</li>
-      </ul>
+  <div class="section-label">O que ele acompanha</div>
+  <h2>Os números que <em>importam de manhã.</em></h2>
+  <p class="section-sub">Sem jargão. Apenas o que ajuda a decidir o dia.</p>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">🌙</div>
+      <div><h3>Sono e suas fases</h3><p>Nota, horas e o detalhe de profundo, REM, leve e acordado. Com comparação à média.</p></div>
     </div>
-    <div class="persona">
-      <div class="persona-for athlete">Para atletas</div>
-      <h3>Comece cada dia sabendo seu estado.</h3>
-      <p>Sem achismos. Todo dia, uma resposta clara baseada em como seu corpo recuperou e o que seu coach planejou.</p>
-      <ul class="persona-features">
-        <li><span class="pf-icon">🌅</span> Briefing diário no horário que você escolher</li>
-        <li><span class="pf-icon">💚</span> Recuperação em linguagem simples, sem jargão técnico</li>
-        <li><span class="pf-icon">📅</span> Treino do dia do seu coach com contexto de recuperação</li>
-        <li><span class="pf-icon">📈</span> Evolução dos últimos 7 dias para acompanhar sua progressão</li>
-      </ul>
+    <div class="feature">
+      <div class="feature-icon">💚</div>
+      <div><h3>HRV vs. baseline</h3><p>Variabilidade cardíaca comparada à sua faixa pessoal. Verde dentro, vermelho fora.</p></div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📊</div>
+      <div><h3>Carga de treino</h3><p>ACWR e TSS da semana. Indica acúmulo excessivo ou insuficiente.</p></div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📈</div>
+      <div><h3>Evolução de 7 dias</h3><p>Tendência de sono e HRV. O histórico, não só o número de hoje.</p></div>
     </div>
   </div>
 </section>
 
-<!-- WAITLIST CTA -->
-<div class="cta-section" id="waitlist">
-  <div class="section-label" style="margin-bottom:16px;">Acesso antecipado</div>
-  <h2>Seja o primeiro a <em>chegar no pico</em>.</h2>
-  <p>PeakPilot está em acesso antecipado para assessorias esportivas. Entre na lista e entraremos em contato.</p>
-  <form class="email-form" onsubmit="handleSubmit(event)">
-    <input type="email" id="email" placeholder="seu@email.com" required>
-    <button type="submit" class="btn-primary">Solicitar acesso</button>
-  </form>
-  <p class="form-note">Para coaches e assessorias. Sem spam.</p>
+<!-- CTA -->
+<div class="cta-section" id="contato">
+  <div class="section-label" style="margin-bottom:16px;">Interesse?</div>
+  <h2>Por enquanto, é só meu.<br><em>Mas pode deixar de ser.</em></h2>
+  <p>O PeakPilot roda apenas para mim. Se você é atleta ou treinador e quer receber um briefing assim, me avise. Havendo interesse, considero abrir para mais pessoas.</p>
+  <a href="mailto:caio@peakpilot.com.br?subject=Tenho interesse no PeakPilot" class="btn-primary">Tenho interesse</a>
+  <p class="form-note">Sem listas, sem spam. Resposta de um humano.</p>
 </div>
 
 <!-- POWERED BY -->
 <div class="powered">
-  <span class="powered-label">Integra com</span>
+  <span class="powered-label">Construído com</span>
   <span class="powered-badge">⌚ Garmin Connect</span>
   <span class="powered-badge" style="color:#94a3b8">+</span>
-  <span class="powered-badge">📅 TrainingPeaks</span>
-  <span class="powered-badge" style="color:#94a3b8">+</span>
-  <span class="powered-badge">🤖 AI</span>
+  <span class="powered-badge">⚙️ Python &amp; GitHub Actions</span>
 </div>
 
 <!-- FOOTER -->
@@ -682,18 +409,8 @@
     <div class="nav-logo-icon" style="width:26px;height:26px;font-size:14px;">⚡</div>
     PeakPilot
   </div>
-  <p>&copy; 2026 PeakPilot &nbsp;&middot;&nbsp; contact@peakpilot.com.br &nbsp;&middot;&nbsp; peakpilot.com.br</p>
+  <p>&copy; 2026 PeakPilot &nbsp;&middot;&nbsp; projeto pessoal &nbsp;&middot;&nbsp; peakpilot.com.br</p>
 </footer>
 
-<script>
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button');
-    btn.textContent = "Você está na lista!";
-    btn.style.background = '#22c55e';
-    btn.disabled = true;
-    console.log('Email:', document.getElementById('email').value);
-  }
-</script>
 </body>
 </html>
